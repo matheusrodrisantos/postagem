@@ -5,8 +5,10 @@ class Core
     public function start($url)
     {
         $acao='index';
+
         if(isset($_GET['pagina']))
-            {            $controller=ucfirst($url['pagina'].'Controller');
+        {
+            $controller=ucfirst($url['pagina'].'Controller');
         }
         else
         {
@@ -19,7 +21,15 @@ class Core
                 $controller='ErroController';
         }
 
-        call_user_func_array(array(new $controller,$acao),array());
+        if(isset($url['id']) && $url !=null)
+        {
+            $id=$url['id'];
+        }
+        else
+        {
+            $id=null;
+        }
+        call_user_func_array(array(new $controller,$acao),array('id'=>$id));
 
     }
 }

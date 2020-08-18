@@ -1,17 +1,18 @@
 <?php
-class HomeController
+class PostController
 {
-    public function index()
+    public function index($parametros)
     {
         try
         {
-            $colecPostagem=Postagem::selecionaTodos();
+            $postagem=Postagem::selecionaUm($parametros);
             $loader = new \Twig\Loader\FilesystemLoader('App/View');
             $twig = new \Twig\Environment($loader);
-            $template = $twig->load('home.html');
+            $template = $twig->load('single.html');
 
             $parametros=array();
-            $parametros['postagem']=$colecPostagem;
+            $parametros['titulo']=$postagem->titulo;
+            $parametros['conteudo']=$postagem->conteudo;
             $conteudo=$template->render($parametros);
             echo $conteudo;
         }
@@ -21,4 +22,3 @@ class HomeController
         }
     }
 }
-?>

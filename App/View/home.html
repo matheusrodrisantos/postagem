@@ -1,6 +1,20 @@
-<section>
+<h1></h1>
+{% for post in postagem %}
     <div>
-        Home
+            <h2>
+                <a href="http://localhost/postagem/?pagina=post&id={{post.postagem}}">
+                    {{post.titulo}}
+                </a>
+            </h2>
+            <p>
+                {{post.conteudo}}
+            </p>
     </div>
-</section>
+{% endfor %}
+<div>
+    Home
+</div>
+<div>
+    Testanto
+</div>
 
