@@ -7,19 +7,18 @@ class Comentario
         
     }
 
-    public static function selecionaUm($id_postagem)
+    public static function selecionaPorId($id_postagem)
     {
         $conn=Connection::getConn();
         $sql="SELECT * FROM comentario WHERE id_postagem =:id_postagem";
         $sql=$conn->prepare($sql);
-        $sql->bindValue(':id_postagem',$id,PDO::PARAM_INT);
+        $sql->bindValue(':id_postagem',$id_postagem,PDO::PARAM_INT);
         $sql->execute();
 
-        $resultado=$sql->fetchObject('Comentario');
-
-        if(!$resultado)
+        $resultado=array();
+        while($row=$sql->fetchObject('Comentario'))
         {
-            throw new Exception("Não foi encontrado nenhum registro no banco");
+            $resultado[]=$row;
         }
         return $resultado;
     }

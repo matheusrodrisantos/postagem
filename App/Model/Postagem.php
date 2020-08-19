@@ -30,12 +30,17 @@ class Postagem
         $sql->bindValue(':id',$id,PDO::PARAM_INT);
         $sql->execute();
         $resultado=$sql->fetchObject('Postagem');
+        
         if(!$resultado)
         {
             throw new Exception("Não foi encontrado nenhum registro no banco");
         }
+        
+        else
+        {
+            $resultado->comentarios=Comentario::selecionaPorId($resultado->postagem);
+        }
         return $resultado;
-
     }
 }
 

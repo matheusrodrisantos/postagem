@@ -5,4 +5,21 @@
     <p>
         {{conteudo}}
     </p>
+    
 </header>
+<div>
+    <hr>
+    <h4>Comentarios</h4>
+    {% if comentarios==false %}
+        <p>Nenhum comentário encontrado para essa postagem</p>
+    {% else %}
+        {% for comentario in comentarios %}
+        <div>
+            <h5>{{comentario.nome}}</h5>
+            <div>
+                {{comentario.comentario}}
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+</div>
