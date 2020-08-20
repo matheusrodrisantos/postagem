@@ -1,14 +1,19 @@
 <h1>Gerenciador de conteudo</h1>
 <a href="http://localhost/postagem/?pagina=admin&metodo=create">Criar publicação</a>
 <hr>
-<table border="2">
+<table border="2" class='table'>
+    <thead>
+        <th> ID </th>
+        <th> TÍTULO </th>
+        <th> ALTERAÇÃO </th>
+        <th> DELEÇÃO </th>
+    </thead>
+    {% for postagem in post%}
     <tr>
-        <td> ID </td>
-        <td> TÍTULO </td>
-        <td> ALTERAÇÃO </td>
-        <td> DELEÇÃO </td>
+        <td>{{postagem.postagem}}</td>
+        <td>{{postagem.titulo}}</td>
+        <td><a href="?pagina=admin&metodo=update&id={{postagem.postagem}}">Alterar</a></td>
+        <td><a href="?pagina=admin&metodo=delete&id={{postagem.postagem}}">Deletar</a></td>
     </tr>
-    <tr>
-
-    </tr>
+    {% endfor%}
 </table>

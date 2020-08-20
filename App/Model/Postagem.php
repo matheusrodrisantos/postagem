@@ -63,5 +63,26 @@ class Postagem
         }
         return true;
     }
+
+    public static function update($dadosPost)
+    {
+        $titulo=$dadosPost['titulo'];
+        $conteudo=$dadosPost['conteudo'];
+        $id=$dadosPost['id'];
+        var_dump($dadosPost);
+        $con=Connection::getConn();
+        $sql="UPDATE postagem set titulo=:titulo, set conteudo=:conteudo WHERE postagem=:id";
+        $sql=$con->prepare($sql);
+        $sql->bindValue(':titulo',$titulo);
+        $sql->bindValue(':conteudo',$conteudo);
+        $sql->bindValue(':id',$id,PDO::PARAM_INT);
+        $resultado=$sql->execute();
+        if($resultado==0)
+        {
+            throw new Exception("Falha ao atualizar publicação");
+            return false;
+        }
+        return true;
+    }
 }
 

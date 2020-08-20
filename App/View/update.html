@@ -1,0 +1,17 @@
+<h1>Atualizar</h1>
+
+<form method="POST" action="http://localhost/postagem/?pagina=admin&metodo=update">
+    <p>
+        <span>Título</span>
+        <input type="text" name="titulo" value="{{post.titulo}}"> 
+        <input type="hidden" name="id" value="{{post.postagem}}">
+    </p>
+    <p>
+        <span>Conteudo</span>
+        <br>
+        <textarea cols="10" name='conteudo'>{{post.conteudo}}</textarea>
+    </p>
+    <p>
+        <input type="submit" name='enviar' value='enviar'>
+    </p>    
+</form>
