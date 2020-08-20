@@ -4,8 +4,17 @@ class Core
 {
     public function start($url)
     {
-        $acao='index';
-
+        
+        
+        if(isset($url['metodo']))
+        {
+            $acao=$url['metodo'];
+        }
+        else
+        {
+            $acao='index';
+        }
+        
         if(isset($_GET['pagina']))
         {
             $controller=ucfirst($url['pagina'].'Controller');
