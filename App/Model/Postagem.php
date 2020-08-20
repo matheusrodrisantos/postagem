@@ -42,5 +42,26 @@ class Postagem
         }
         return $resultado;
     }
+    public static function insert($dadosPost)
+    {
+        if(empty($dadosPost['titulo']) || empty($dadosPost['conteudo']))
+        {
+            throw new Exception("Preencha todos os campos");
+            return false;
+        }
+
+        $con=Connection::getConn();
+        $sql='INSERT INTO postagem(titulo,conteudo) VALUES(:tit,:cont)';
+        $sql =$con->prepare($sql);
+        $sql->bindValue(':tit',$dadosPost['titulo']);
+        $sql->bindValue(':cont',$dadosPost['conteudo']);
+        $resultado=$sql->execute();
+        if($resultado==0)
+        {
+            throw new Exception("Falha ao inserir publicação");
+            return false;
+        }
+        return true;
+    }
 }
 
