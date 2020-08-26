@@ -62,10 +62,20 @@ class AdminController{
         $conteudo=$template->render($parametros);
         echo $conteudo;
     }
+
     function delete()
     {
-
+        if(isset($_GET['id']) and !empty($_GET['id']))
+        {
+            try
+            {
+                Postagem::delete($_GET);            
+            }
+            catch(Exception $e)
+            {
+                echo $e->getMessage();
+            }
+        }
     }
-
 }
 ?>

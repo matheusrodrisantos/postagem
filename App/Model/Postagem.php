@@ -69,9 +69,8 @@ class Postagem
         $titulo=$dadosPost['titulo'];
         $conteudo=$dadosPost['conteudo'];
         $id=$dadosPost['id'];
-        var_dump($dadosPost);
         $con=Connection::getConn();
-        $sql="UPDATE postagem set titulo=:titulo, set conteudo=:conteudo WHERE postagem=:id";
+        $sql="UPDATE postagem set titulo=:titulo, conteudo=:conteudo WHERE postagem=:id";
         $sql=$con->prepare($sql);
         $sql->bindValue(':titulo',$titulo);
         $sql->bindValue(':conteudo',$conteudo);
@@ -84,5 +83,23 @@ class Postagem
         }
         return true;
     }
+    public static function delete($dadosPost)
+    {
+        $con=Connection::getConn();
+        var_dump($dadosPost);
+        $id=$dadosPost['id'];
+        $sql="DELETE FROM postagem WHERE postagem=:id";
+        $sql=$con->prepare($sql);
+        $sql->bindValue(':id',$id,PDO::PARAM_INT);
+        
+        $resultado=$sql->execute();
+        if($resultado==0)
+        {
+            throw new Exception("Falha para deletar a publicação");
+            return false; 
+        }
+        return true;
+    
+    }   
 }
 
